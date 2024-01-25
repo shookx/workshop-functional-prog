@@ -5,10 +5,12 @@
 ## Step 3
 ##
 
-MAIN = main.hs
+MAIN = Main.hs
+
+BIN = test
 
 all:
-	ghc --make $(MAIN)
+	ghc --make $(MAIN) -o $(BIN)
 
 clean:
-	rm -f *.o *.hi
+	rm -f *.o *.hi $(BIN)

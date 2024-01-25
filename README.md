@@ -2,7 +2,7 @@
 
 ## Project aim
 
-Do you remind about DoOps ? Our favorite calculator which calculate any arithmetic expression like this :
+Do you remind about DoOp ? Our favorite calculator which calculate any arithmetic expression like this :
 ```
 42 + 404 = 426
 ```
@@ -17,6 +17,7 @@ We will use an **abstract syntax tree**. It is a binary tree which allow us to d
 - This project will be entirely made the programming language Haskell.
 - Make sure you have `ghc` with `ghc --version`. Otherwise, [download it here](https://www.haskell.org/ghcup/).
 - Create a repository in **public** and send me the link in the Teams group.
+- We will not talk about Monads.
 
 ## Useful links
 - [Abstract Syntax Tree (please not Java)](https://www.geeksforgeeks.org/abstract-syntax-tree-ast-in-java/)
@@ -78,3 +79,29 @@ prototype : divide :: Int -> Int -> ??? Int
 file : Operation.hs
 ```
 Should I give you the answer about the prototype ? `Maybe` yes, `Maybe` no...
+
+### Step 3 - Our first program !
+You have some little functions. It is enough to create a program, and let you imagine how we will retrieve datas with a program. In real life, a calculator doesn't work with `ghci`, isn't it ?
+- Your `Operations.hs` file should now be a module.
+```hs
+module Operations where
+-- Your operation functions
+```
+- Create a `Main.hs` file. We will now do some imperative programming, but please, avoid this type of programming when you code in functionnal programming.
+```
+function : main
+prototype : main::IO ()
+file : Main.hs
+```
+The `IO()` class is absolutely necessary. You should end your functions by a `IO` instruction, such as `print`. You should also import `System.Environment` and `System.Exit`. Also, you have a module you created yourself. Why not implementing it ?
+```hs
+-- read the paragraph above
+main :: IO()
+main = do
+    -- do your business
+    print "Hello world!" -- "print" is an IO function. You should always finish by an IO. 
+```
+Also, you have a Makefile to compile your program. Modify it as you want.
+### Step 4 - DoOp
+You have all necessary tools to make a `DoOp` program. Just a few thing I'd like to add : your program should retrieve line by line your basic operation, like
+
