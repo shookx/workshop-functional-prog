@@ -103,5 +103,58 @@ main = do
 ```
 Also, you have a Makefile to compile your program. Modify it as you want.
 ### Step 4 - DoOp
-You have all necessary tools to make a `DoOp` program. Just a few thing I'd like to add : your program should retrieve line by line your basic operation, like
+You have all necessary tools to make a `DoOp` program. Just a few thing I'd like to add : your program should retrieve line by line your basic operation, like `1 + 2`.
+For the divide operation, make sure you handle it correctly.
 
+# Advanced steps
+
+Congratulations ! You achieved your first Haskell program successfully ! \
+Now you're here, we're going to build our tree. Since the main core of your program is set up, only few more implementations is required. However, you had better take a few time to understand what we are going to do. Maybe it could give you ideas on your C (tek1) / C++ (tek2) projects ? \
+One more thing for _tek2_ students : you could follow my steps below, or you could do the assignment _in your own way_. 
+
+## Callback functions, sort and cool things
+### Step 5 - Predicates
+- A predicate is a (like in maths) function that takes parameters and return a boolean.
+- Create a function that check if the string is a operator.
+- Create a function that check if the string is a number. \
+For this function, don't be sophisticated. Use `isDigit`.
+
+### Step 6 - filterArr
+- Create a function that filters only if the predicate is valid.
+- The filter function **MUST** take a predicate as a parameter (callback function).
+```
+function : filterArr
+prototype : filterArr :: (a -> Bool) -> [a] -> [a]
+file : Parse.hs
+```
+```
+ghci> :l Parse.hs
+[1 of 1] Compiling Parse            ( Parse.hs, interpreted )
+Ok, one module loaded.
+ghci> filterArr isNum ["1", "2", "+", "42"]
+["1","2","42"]
+ghci> filterArr isOperator ["1", "2", "+", "42"]
+["+"]
+ghci> filterArr (\ x -> x `mod` 2 == 0) [1, 2, 3, 4, 5]
+[2,4]
+```
+
+### Step 7 - AssembleArr
+- Like Avengers, assemble arrays in tuple.
+```
+function : AssembleArr
+prototype : AssembleArr :: ([a], [a]) -> [a]
+file : Parse.hs
+```
+
+### Step 8 - lineSort
+```
+function : lineSort
+prototype : lineSort :: [a] -> [a]
+file : Parse.hs
+```
+```
+ghci> sortLine ["1", "+", "2", "-", "15", "/", "42"]
+["+","-","/","1","2","15","42"]
+```
+- Perhaps previous functions are useful for this one...
