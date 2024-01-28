@@ -139,22 +139,106 @@ ghci> filterArr (\ x -> x `mod` 2 == 0) [1, 2, 3, 4, 5]
 [2,4]
 ```
 
-### Step 7 - AssembleArr
-- Like Avengers, assemble arrays in tuple.
+### Step 7 - parseLine
 ```
-function : AssembleArr
-prototype : AssembleArr :: ([a], [a]) -> [a]
-file : Parse.hs
-```
-
-### Step 8 - lineSort
-```
-function : lineSort
-prototype : lineSort :: [a] -> [a]
+function : parseLine
+prototype : parseLine :: [a] -> [a]
 file : Parse.hs
 ```
 ```
-ghci> sortLine ["1", "+", "2", "-", "15", "/", "42"]
+ghci> parseLine ["1", "+", "2", "-", "15", "/", "42"]
 ["+","-","/","1","2","15","42"]
 ```
 - Perhaps previous functions are useful for this one...
+
+## Abstract Syntax Tree
+In the following steps, you are going to manipulate the `Tree` data structure defined in the `Tree.hs` file. We are going to use this file. \
+I assume you have read links above.
+
+### ["Treetorial"](https://youtu.be/2Fka4_Cf2M4?si=ooFQIj7qiIu61jwL)
+Welcome everyone ! Little tutorial to handle the AST data structure ! \
+In your ghci, for testing your functions, I've written a little guide above ! 
+- Show the value
+```
+ghci> Value 42
+42
+```
+- Show an addition
+```
+ghci> Add (Value 21) (Value 21)
+21 + 21
+```
+- Show a substraction
+```
+ghci> Sub (Value 84) (Value 84)
+84 - 84
+```
+- Show a multiplication followed by a division
+```
+ghci> Mul (Value 2) (Div (Value 84) (Value 2))
+2 * 84 / 2
+```
+Don't forget like, share and suscribe to the channel <3
+
+### Step 8 - Build an expression
+Jokes aside, we are going to build the ASTree.
+- Create a function that takes two ASTree values and the string operand.
+- This function should return the right ASTree expression depending on the operation given.
+```
+function : buildExpr
+prototype : buildExpr :: ASTree -> String -> ASTree -> ASTree
+file : Tree.hs
+```
+```
+ghci> buildExpr (Value 3) "+" (Value 10)
+3 + 10
+```
+### Step 9 - mapValues
+```
+function : mapValues
+prototype : mapValues :: [String] -> [ASTree]
+file : Tree.hs
+```
+- Use the `map` function to recursively convert each element of the array to Value.
+- `map` works like `filterArr`, it take a function, and apply it to all the array.
+- Therefore build the right callback function.
+```
+function : mapValues
+prototype : mapValues :: [String] -> [ASTree]
+file : Tree.hs
+```
+```
+ghci> mapValues ["1", "2", "3"]
+[1,2,3]
+```
+
+### Step 10 - Expression list handling
+```
+function : buildExprList
+prototype : buildExprList :: [String] -> [ASTree] -> ASTree
+file : Tree.hs
+```
+- This one is a little trickier.
+- This function build each expressions from both list.
+- Each new built expressions return back to the ASTree list.
+- Once the operation list is empty, return the final ASTree built.
+- Please don't hesitate to ask for this one.
+
+### ASTree building 
+- With the previous function, build the ASTree.
+```
+function : buildAST
+prototype : buildAST ([String, String] -> ASTree)
+file : Tree.hs
+```
+```
+```
+## Final expression program
+Wow ! You are here ? I'm really chokbar to be honest. \
+To do the final calculation, you need to do a tree traversal, and do the right operation in the right time.
+
+## Going further
+- Add the true priority order (multiplication and division).
+- Add parenthesis.
+- Redo all little functions in Javascript ? Next workshop is Node.js.
+Have fun !
