@@ -22,10 +22,10 @@ mapValues :: [String] -> [ASTree]
 mapValues xs = map (\x -> Value (read x :: Int)) xs
 
 buildExprList :: [String] -> [ASTree] -> ASTree
-buildExprList [] [] = Value 0
-buildExprList (x:xs) [] = error "Not enough values for operators"
-buildExprList [] (y:ys) = error "Not enough operators for values"
-buildExprList (x:xs) (y:ys) = buildExpr y x (buildExprList xs ys)
+buildExprList [] (v:[]) = v
+buildExprList [] _ = error "Not enough operators for values"
+buildExprList (op:ops) (val1:val2:vals) = buildExpr val1 op (buildExprList ops (val2:vals))
+buildExprList _ _ = error "Unexpected pattern"
 
 buildAST :: ([String], [String]) -> ASTree
 buildAST (ops, vals) = buildExprList ops (mapValues vals)
