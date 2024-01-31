@@ -29,3 +29,10 @@ buildExprList _ _ = error "Unexpected pattern"
 
 buildAST :: ([String], [String]) -> ASTree
 buildAST (ops, vals) = buildExprList ops (mapValues vals)
+
+eval :: ASTree -> Int
+eval (Value n) = n
+eval (Add e1 e2) = eval e1 + eval e2
+eval (Sub e1 e2) = eval e1 - eval e2
+eval (Mul e1 e2) = eval e1 * eval e2
+eval (Div e1 e2) = eval e1 `div` eval e2
